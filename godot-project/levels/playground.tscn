@@ -21,9 +21,13 @@ position = Vector2(-136, 443)
 position = Vector2(-437, 553)
 scale = Vector2(1, 6.508)
 
-[node name="Mook" parent="." instance=ExtResource("2_bvy2x")]
+[node name="PlayerMook" parent="." instance=ExtResource("2_bvy2x")]
 position = Vector2(-57, -45)
 player_controlled = true
+
+[node name="Mook" parent="." instance=ExtResource("2_bvy2x")]
+position = Vector2(178, -22)
+speed = 40
 
 [node name="Camera2D" type="Camera2D" parent="."]
 
