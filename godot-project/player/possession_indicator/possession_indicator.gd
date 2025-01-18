@@ -1,6 +1,6 @@
 extends Node2D
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	for child in get_parent().get_children():
 		if child is Creature and child.player_controlled:
 			position = child.position

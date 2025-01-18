@@ -1,6 +1,10 @@
 extends Controller
 
 func control() -> void:
+	if !creature:
+		# Player is dead
+		return
+
 	creature.walk(Input.get_vector(
 		"move_left", 
 		"move_right", 
@@ -15,6 +19,10 @@ func control() -> void:
 
 # Player input gets special treatment, usually controllers can't read input this way
 func _input(event: InputEvent) -> void:
+	if !creature:
+		# Player is dead
+		return
+	
 	# This way both work, even at the same time technically
 	# But if one is not touched, it won't be used.
 	if event is InputEventMouseMotion:

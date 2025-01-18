@@ -1,7 +1,9 @@
 extends Node
 class_name State
 
-@export var animation: String
+@export var front_animation: String
+@export var back_animation: String
+
 @export var duration: float
 
 # This assumes that the states are all in the state container under the mook

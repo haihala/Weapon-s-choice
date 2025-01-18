@@ -28,7 +28,7 @@ func _ready():
 	else:
 		controller = ai
 
-func _process(_delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	if can_act():
 		controller.control()
 	else:
@@ -37,9 +37,19 @@ func _process(_delta: float) -> void:
 		velocity = hit_knockback * $HitTimer.time_left / $HitTimer.wait_time
 	move_and_slide()
 	active_state.on_tick()
+	update_sprite_facing()
 
 func can_act() -> bool:
 	return active_state != strike_state and $HitTimer.is_stopped()
+
+func get_animation(state: State = active_state) -> String:
+	return state.front_animation if facing_direction.y > 0 else state.back_animation
+
+func update_sprite_facing() -> void:
+	$Sprite.flip_h = facing_direction.x < 0
+	var animation = get_animation()
+	if animation:
+		$Sprite.animation = animation
 
 func idle() -> void:
 	if active_state != idle_state:
@@ -47,9 +57,6 @@ func idle() -> void:
 		velocity = Vector2.ZERO
 
 func walk(direction: Vector2 = facing_direction) -> void:
-	if not can_act():
-		return
-
 	if direction == Vector2.ZERO:
 		idle()
 	else:
@@ -71,9 +78,10 @@ func sword_toss() -> void:
 	get_parent().add_child(sword)
 
 func take_damage(amount: int, impact_point: Vector2) -> void:
+	print("Taking damage")
 	health -= amount
 	hit_knockback = (position - impact_point).normalized() * 500 * amount
-	$HitTimer.start()
+	$HitTimer.start(0.2*amount)
 	if health <= 0:
 		die()
 
@@ -97,9 +105,9 @@ func activate_state(incoming: State) -> void:
 	active_state = incoming
 
 	incoming.on_enter()
-	if incoming.animation != "":
+	var animation = get_animation(incoming)
+	if animation != "":
 		# Non looping animations will return to idle after we're done
-		$Sprite.play(incoming.animation)
+		$Sprite.play(animation)
 	elif incoming.duration != 0:
-		print(incoming.duration)
 		$StateTimer.start(incoming.duration)
