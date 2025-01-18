@@ -1,14 +1,19 @@
-extends Node2D
+extends CharacterBody2D
+class_name Creature
 
 @export var player_controlled: bool
-@export var controller: GDScript
-var ai_controller: Controller
+@export var ai_controller: GDScript
+var ai: Controller
+var controller: Controller
 
-func _ready() -> void:
-	ai_controller = controller.new()
+@export var speed = 100
 
-func _process(delta: float) -> void:
-	if player_controlled:
-		PlayerController.foo()
-	else:
-		ai_controller.foo()
+func _ready():
+	ai = ai_controller.new()
+	controller = PlayerController if player_controlled else ai
+	controller.bind(self)
+
+func _process(_delta: float) -> void:
+	controller.control()
+	velocity = controller.direction * speed
+	move_and_slide()
