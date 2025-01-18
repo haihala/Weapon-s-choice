@@ -1,0 +1,27 @@
+[gd_scene load_steps=3 format=3 uid="uid://ge8vlgyrkbb0"]
+
+[ext_resource type="PackedScene" uid="uid://bsqowk7lfn81c" path="res://levels/objects/obstacle.tscn" id="1_e18v3"]
+[ext_resource type="PackedScene" uid="uid://dry3qmnw5ic2x" path="res://creatures/mook/mook.tscn" id="2_bvy2x"]
+
+[node name="Playground" type="Node2D"]
+
+[node name="Obstacle" parent="." instance=ExtResource("1_e18v3")]
+position = Vector2(-606, -229)
+scale = Vector2(6.18, 1)
+
+[node name="Obstacle2" parent="." instance=ExtResource("1_e18v3")]
+position = Vector2(599, -329)
+scale = Vector2(3.974, 3.974)
+
+[node name="Obstacle4" parent="." instance=ExtResource("1_e18v3")]
+position = Vector2(-136, 443)
+
+[node name="Obstacle3" parent="." instance=ExtResource("1_e18v3")]
+position = Vector2(-437, 553)
+scale = Vector2(1, 6.508)
+
+[node name="Mook" parent="." instance=ExtResource("2_bvy2x")]
+position = Vector2(-57, -45)
+player_controlled = true
+
+[node name="Camera2D" type="Camera2D" parent="."]

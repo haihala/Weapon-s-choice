@@ -11,5 +11,10 @@ config_version=5
 [application]
 
 config/name="Godot-project"
+run/main_scene="res://levels/playground.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
 config/icon="res://icon.svg"
+
+[autoload]
+
+PlayerController="*res://player/player_controller.gd"
