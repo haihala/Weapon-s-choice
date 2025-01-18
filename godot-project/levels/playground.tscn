@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://ge8vlgyrkbb0"]
+[gd_scene load_steps=5 format=3 uid="uid://ge8vlgyrkbb0"]
 
 [ext_resource type="PackedScene" uid="uid://bsqowk7lfn81c" path="res://levels/objects/obstacle.tscn" id="1_e18v3"]
 [ext_resource type="PackedScene" uid="uid://dry3qmnw5ic2x" path="res://creatures/mook/mook.tscn" id="2_bvy2x"]
 [ext_resource type="PackedScene" uid="uid://birs2ju00x7xq" path="res://levels/objects/fire.tscn" id="3_uwgwj"]
+[ext_resource type="PackedScene" uid="uid://bgcnky6v55gnt" path="res://player/possession_indicator/possession_indicator.tscn" id="4_o2a13"]
 
 [node name="Playground" type="Node2D"]
 
@@ -33,3 +34,5 @@ speed = 40
 
 [node name="Fire" parent="." instance=ExtResource("3_uwgwj")]
 position = Vector2(291, 101)
+
+[node name="PossessionIndicator" parent="." instance=ExtResource("4_o2a13")]

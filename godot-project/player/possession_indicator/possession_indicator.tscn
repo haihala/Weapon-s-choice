@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://bgcnky6v55gnt"]
+
+[ext_resource type="Texture2D" uid="uid://h2whgbb8d1lb" path="res://player/sword.png" id="1_5tuo0"]
+[ext_resource type="Script" path="res://player/possession_indicator/possession_indicator.gd" id="1_nxc7c"]
+
+[node name="PossessionIndicator" type="Node2D"]
+script = ExtResource("1_nxc7c")
+
+[node name="Sword" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = ExtResource("1_5tuo0")

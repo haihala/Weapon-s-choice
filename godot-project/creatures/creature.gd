@@ -61,6 +61,15 @@ func strike() -> void:
 	if can_act():
 		activate_state(strike_state)
 
+func sword_toss() -> void:
+	unpossess()
+	
+	var sword = load("res://player/projectile_sword/projectile_sword.tscn").instantiate()
+	sword.rotation = facing_direction.angle()
+	sword.position = position + facing_direction * 50
+	sword.previous_host = self
+	get_parent().add_child(sword)
+
 func take_damage(amount: int, impact_point: Vector2) -> void:
 	health -= amount
 	hit_knockback = (position - impact_point).normalized() * 500 * amount
@@ -74,9 +83,11 @@ func die() -> void:
 func possess() -> void:
 	controller = PlayerController
 	controller.bind(self)
+	player_controlled = true
 
 func unpossess() -> void:
 	controller = ai
+	player_controlled = false
 
 func activate_state(incoming: State) -> void:
 	if active_state:

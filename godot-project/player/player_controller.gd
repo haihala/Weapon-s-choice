@@ -10,6 +10,8 @@ func control() -> void:
 	
 	if Input.is_action_just_pressed("strike"):
 		creature.strike()
+	elif Input.is_action_just_pressed("possess"):
+		creature.sword_toss()
 
 # Player input gets special treatment, usually controllers can't read input this way
 func _input(event: InputEvent) -> void:

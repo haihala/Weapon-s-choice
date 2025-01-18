@@ -1,0 +1,36 @@
+[gd_scene load_steps=5 format=3 uid="uid://davyakxngkgr"]
+
+[ext_resource type="Script" path="res://player/projectile_sword/projectile_sword.gd" id="1_w5orl"]
+[ext_resource type="Texture2D" uid="uid://h2whgbb8d1lb" path="res://player/sword.png" id="2_jvvmb"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_q7b4l"]
+radius = 11.0
+height = 64.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_spdoc"]
+radius = 28.0
+height = 96.0
+
+[node name="Sword" type="StaticBody2D"]
+collision_layer = 0
+script = ExtResource("1_w5orl")
+
+[node name="Sword" type="Sprite2D" parent="."]
+texture_filter = 1
+rotation = -1.5708
+scale = Vector2(3, 3)
+texture = ExtResource("2_jvvmb")
+
+[node name="CollisionShape3D" type="CollisionShape2D" parent="."]
+rotation = -1.5708
+shape = SubResource("CapsuleShape2D_q7b4l")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape3D2" type="CollisionShape2D" parent="Area2D"]
+rotation = -1.5708
+shape = SubResource("CapsuleShape2D_spdoc")
+
+[connection signal="body_entered" from="Area2D" to="." method="on_collision"]

@@ -26,7 +26,7 @@ animations = [{
 radius = 63.0079
 
 [node name="Mook" type="CharacterBody2D" node_paths=PackedStringArray("idle_state", "walk_state", "strike_state")]
-collision_layer = 2
+collision_layer = 6
 script = ExtResource("1_sy2ko")
 ai_controller = ExtResource("2_km0d1")
 idle_state = NodePath("StateContainer/Idle")
