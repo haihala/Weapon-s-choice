@@ -6,8 +6,9 @@ class_name Creature
 var ai: Controller
 var controller: Controller
 
-@export var speed = 300
 @export var health = 2
+@export var speed = 300
+var navigation_target: Vector2
 
 @export var idle_state: State
 @export var walk_state: State
@@ -67,6 +68,17 @@ func walk(direction: Vector2 = facing_direction) -> void:
 		if active_state != walk_state:
 			activate_state(walk_state)
 		velocity = direction.normalized() * speed
+
+func navigate_to(point: Vector2) -> void:
+	# TODO: Debounce
+	$NavigationAgent2D.target_position = point
+	var direction = (
+		$NavigationAgent2D.get_next_path_position() - global_position
+	).normalized()
+	# This is only called for AI,
+	# so it's safe to assume we can turn the direction we are going
+	facing_direction = direction
+	walk()
 
 func host_strike() -> void:
 	velocity = Vector2.ZERO

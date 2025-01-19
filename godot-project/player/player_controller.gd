@@ -29,7 +29,7 @@ func _input(event: InputEvent) -> void:
 	# But if one is not touched, it won't be used.
 	if event is InputEventMouseMotion:
 		var cam = get_viewport().get_camera_2d()
-		var mouse_position = cam.get_local_mouse_position()
+		var mouse_position = cam.get_local_mouse_position() + cam.position
 		
 		creature.facing_direction = (mouse_position - creature.position).normalized()
 	elif event is InputEventJoypadMotion:
