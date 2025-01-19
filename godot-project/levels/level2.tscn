@@ -23,9 +23,6 @@ tile_set = ExtResource("1_fipoi")
 position = Vector2(711, 423)
 zoom = Vector2(0.553, 0.553)
 
-[node name="Gobo" parent="." instance=ExtResource("2_ad2y8")]
-position = Vector2(284, 385)
-
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
 navigation_polygon = SubResource("NavigationPolygon_pgxnk")
 
@@ -34,3 +31,6 @@ position = Vector2(1167, 703)
 
 [node name="Nav target 2" type="Node2D" parent="." groups=["navigation_target"]]
 position = Vector2(252, 181)
+
+[node name="Gobo" parent="." instance=ExtResource("2_ad2y8")]
+position = Vector2(284, 385)

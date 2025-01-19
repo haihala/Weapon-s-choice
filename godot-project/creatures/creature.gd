@@ -8,7 +8,6 @@ var controller: Controller
 
 @export var health = 2
 @export var speed = 300
-var navigation_target: Vector2
 
 @export var idle_state: State
 @export var walk_state: State
@@ -29,6 +28,16 @@ func _ready():
 		possess()
 	else:
 		controller = ai
+
+	# This is a workaround to wait one frame before running the first
+	# _physics_process. This is so that the navigation server is in sync.
+	# Otherwise there is an error
+	set_physics_process(false)
+	call_deferred('setup')
+
+func setup():
+	await get_tree().physics_frame
+	set_physics_process(true)
 
 func _physics_process(_delta: float) -> void:
 	if can_act():
@@ -70,8 +79,9 @@ func walk(direction: Vector2 = facing_direction) -> void:
 		velocity = direction.normalized() * speed
 
 func navigate_to(point: Vector2) -> void:
-	# TODO: Debounce
-	$NavigationAgent2D.target_position = point
+	if $NavigationAgent2D.target_position != point:
+		$NavigationAgent2D.target_position = point
+
 	var direction = (
 		$NavigationAgent2D.get_next_path_position() - global_position
 	).normalized()
