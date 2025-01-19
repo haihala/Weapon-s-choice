@@ -17,6 +17,8 @@ func activate_hitbox() -> void:
 	if hitbox_scene:
 		hitbox = hitbox_scene.instantiate()
 		hitbox.position = creature.facing_direction * hitbox_offset
+		hitbox.rotation = creature.facing_direction.angle()
+		hitbox.register_owner(creature)
 		creature.add_child(hitbox)
 	creature.force_movement(lunge_distance * creature.facing_direction, 0.5)
 	has_activated = true

@@ -5,6 +5,7 @@ class_name State
 @export var back_animation: String
 
 @export var duration: float
+@export var blocking: bool
 
 # This assumes that the states are all in the state container under the mook
 @onready var creature: Creature = get_parent().get_parent()

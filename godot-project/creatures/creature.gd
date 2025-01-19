@@ -11,7 +11,8 @@ var controller: Controller
 
 @export var idle_state: State
 @export var walk_state: State
-@export var strike_state: State
+@export var host_strike_state: State
+@export var sword_swing_state: State
 var active_state: State
 
 var forced_movement: Vector2
@@ -40,7 +41,7 @@ func _physics_process(_delta: float) -> void:
 	move_and_slide()
 
 func can_act() -> bool:
-	return active_state != strike_state and $HitTimer.is_stopped()
+	return $HitTimer.is_stopped() and not active_state.blocking
 
 func get_animation(state: State = active_state) -> String:
 	return state.front_animation if facing_direction.y > 0 else state.back_animation
@@ -67,10 +68,9 @@ func walk(direction: Vector2 = facing_direction) -> void:
 			activate_state(walk_state)
 		velocity = direction.normalized() * speed
 
-func strike() -> void:
-	if can_act():
-		velocity = Vector2.ZERO
-		activate_state(strike_state)
+func host_strike() -> void:
+	velocity = Vector2.ZERO
+	activate_state(host_strike_state)
 
 func sword_toss() -> void:
 	unpossess()
@@ -80,6 +80,10 @@ func sword_toss() -> void:
 	sword.position = position + facing_direction * 50
 	sword.previous_host = self
 	get_parent().add_child(sword)
+
+func sword_swing() -> void:
+	velocity = Vector2.ZERO
+	activate_state(sword_swing_state)
 
 func force_movement(initial_movement: Vector2, duration: float) -> void:
 	forced_movement = initial_movement

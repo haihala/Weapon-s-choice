@@ -1,9 +1,10 @@
-[gd_scene load_steps=21 format=3 uid="uid://i8c6mhnyigcv"]
+[gd_scene load_steps=22 format=3 uid="uid://i8c6mhnyigcv"]
 
 [ext_resource type="Script" path="res://creatures/creature.gd" id="1_j7eov"]
 [ext_resource type="Script" path="res://creatures/slime/slime_ai.gd" id="2_26rvh"]
 [ext_resource type="Script" path="res://creatures/states/State.gd" id="3_5x8pc"]
 [ext_resource type="Script" path="res://creatures/states/melee_attack_state.gd" id="4_m0cli"]
+[ext_resource type="PackedScene" uid="uid://dbnupk8r7roe7" path="res://player/sword_swoosh.tscn" id="5_x37oe"]
 [ext_resource type="Texture2D" uid="uid://bwkurgwh5exmn" path="res://creatures/slime/slime_sheet_back.png" id="6_xmage"]
 [ext_resource type="Texture2D" uid="uid://tni4vjdk54mb" path="res://creatures/slime/slime_sheet_front.png" id="7_vjvah"]
 [ext_resource type="Script" path="res://creatures/damage_area.gd" id="8_17xdd"]
@@ -141,14 +142,15 @@ radius = 29.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_7no4l"]
 radius = 55.0
 
-[node name="Slime" type="CharacterBody2D" node_paths=PackedStringArray("idle_state", "walk_state", "strike_state")]
+[node name="Slime" type="CharacterBody2D" node_paths=PackedStringArray("idle_state", "walk_state", "host_strike_state", "sword_swing_state")]
 collision_layer = 6
 script = ExtResource("1_j7eov")
 ai_controller = ExtResource("2_26rvh")
 speed = 50
 idle_state = NodePath("StateContainer/Idle")
 walk_state = NodePath("StateContainer/Move")
-strike_state = NodePath("StateContainer/Strike")
+host_strike_state = NodePath("StateContainer/Slide")
+sword_swing_state = NodePath("StateContainer/SwordSwing")
 
 [node name="StateContainer" type="Node" parent="."]
 
@@ -162,12 +164,23 @@ script = ExtResource("3_5x8pc")
 front_animation = "walk_front"
 back_animation = "walk_back"
 
-[node name="Strike" type="Node" parent="StateContainer"]
+[node name="Slide" type="Node" parent="StateContainer"]
 script = ExtResource("4_m0cli")
 startup_frames = 1
 lunge_distance = 400.0
 front_animation = "lunge_front"
 back_animation = "lunge_back"
+blocking = true
+
+[node name="SwordSwing" type="Node" parent="StateContainer"]
+script = ExtResource("4_m0cli")
+hitbox_offset = 50.0
+hitbox_scene = ExtResource("5_x37oe")
+startup_frames = 1
+lunge_distance = 50.0
+front_animation = "lunge_front"
+back_animation = "lunge_back"
+blocking = true
 
 [node name="Sprite" type="AnimatedSprite2D" parent="."]
 texture_filter = 1

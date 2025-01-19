@@ -12,10 +12,12 @@ func control() -> void:
 		"move_down"
 	).normalized())
 	
-	if Input.is_action_just_pressed("strike"):
-		creature.strike()
-	elif Input.is_action_just_pressed("possess"):
+	if Input.is_action_just_pressed("host_strike"):
+		creature.host_strike()
+	elif Input.is_action_just_pressed("sword_toss"):
 		creature.sword_toss()
+	elif Input.is_action_just_pressed("sword_swing"):
+		creature.sword_swing()
 
 # Player input gets special treatment, usually controllers can't read input this way
 func _input(event: InputEvent) -> void:

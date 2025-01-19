@@ -1,7 +1,6 @@
-[gd_scene load_steps=6 format=3 uid="uid://ge8vlgyrkbb0"]
+[gd_scene load_steps=5 format=3 uid="uid://ge8vlgyrkbb0"]
 
 [ext_resource type="PackedScene" uid="uid://bsqowk7lfn81c" path="res://levels/objects/obstacle.tscn" id="1_e18v3"]
-[ext_resource type="PackedScene" uid="uid://dry3qmnw5ic2x" path="res://creatures/mook/mook.tscn" id="2_bvy2x"]
 [ext_resource type="PackedScene" uid="uid://birs2ju00x7xq" path="res://levels/objects/fire.tscn" id="3_uwgwj"]
 [ext_resource type="PackedScene" uid="uid://bgcnky6v55gnt" path="res://player/possession_indicator/possession_indicator.tscn" id="4_o2a13"]
 [ext_resource type="PackedScene" uid="uid://i8c6mhnyigcv" path="res://creatures/slime/slime.tscn" id="5_ahj41"]
@@ -23,13 +22,6 @@ position = Vector2(-136, 443)
 position = Vector2(-437, 553)
 scale = Vector2(1, 6.508)
 
-[node name="PlayerMook" parent="." instance=ExtResource("2_bvy2x")]
-position = Vector2(-57, -45)
-
-[node name="Mook" parent="." instance=ExtResource("2_bvy2x")]
-position = Vector2(178, -22)
-speed = 40
-
 [node name="Camera2D" type="Camera2D" parent="."]
 
 [node name="Fire" parent="." instance=ExtResource("3_uwgwj")]
@@ -40,3 +32,6 @@ position = Vector2(291, 101)
 [node name="Slime" parent="." instance=ExtResource("5_ahj41")]
 position = Vector2(56, -345)
 player_controlled = true
+
+[node name="Slime2" parent="." instance=ExtResource("5_ahj41")]
+position = Vector2(-71, 30)
