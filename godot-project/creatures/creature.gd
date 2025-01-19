@@ -14,7 +14,7 @@ var controller: Controller
 @export var strike_state: State
 var active_state: State
 
-var hit_knockback: Vector2
+var forced_movement: Vector2
 var facing_direction: Vector2
 
 func _ready():
@@ -31,13 +31,13 @@ func _ready():
 func _physics_process(_delta: float) -> void:
 	if can_act():
 		controller.control()
-	else:
+	elif !$MovementTimer.is_stopped():
 		# Getting hit
 		# This way it slows down over the timer and is normalized 1-0
-		velocity = hit_knockback * $HitTimer.time_left / $HitTimer.wait_time
-	move_and_slide()
+		velocity = forced_movement * $MovementTimer.time_left / $MovementTimer.wait_time
 	active_state.on_tick()
 	update_sprite_facing()
+	move_and_slide()
 
 func can_act() -> bool:
 	return active_state != strike_state and $HitTimer.is_stopped()
@@ -66,6 +66,7 @@ func walk(direction: Vector2 = facing_direction) -> void:
 
 func strike() -> void:
 	if can_act():
+		velocity = Vector2.ZERO
 		activate_state(strike_state)
 
 func sword_toss() -> void:
@@ -77,11 +78,16 @@ func sword_toss() -> void:
 	sword.previous_host = self
 	get_parent().add_child(sword)
 
+func force_movement(initial_movement: Vector2, duration: float) -> void:
+	forced_movement = initial_movement
+	$MovementTimer.start(duration)
+
 func take_damage(amount: int, impact_point: Vector2) -> void:
-	print("Taking damage")
 	health -= amount
-	hit_knockback = (position - impact_point).normalized() * 500 * amount
-	$HitTimer.start(0.2*amount)
+	var movement = (position - impact_point).normalized() * 500 * amount
+	var hit_duration = 0.2 * amount
+	force_movement(movement, hit_duration)
+	$HitTimer.start(hit_duration)
 	if health <= 0:
 		die()
 
