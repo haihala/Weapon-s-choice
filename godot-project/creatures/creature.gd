@@ -17,6 +17,7 @@ var active_state: State
 
 var forced_movement: Vector2
 var facing_direction: Vector2
+var following_indicator: PossessionIndicator	# The indicator that follows the player
 
 func _ready():
 	activate_state(idle_state)
@@ -96,11 +97,11 @@ func host_strike() -> void:
 
 func sword_toss() -> void:
 	unpossess()
-	
 	var sword = load("res://player/projectile_sword/projectile_sword.tscn").instantiate()
 	sword.rotation = facing_direction.angle()
 	sword.position = position + facing_direction * 50
 	sword.previous_host = self
+	following_indicator.move_to(sword)
 	get_parent().add_child(sword)
 
 func sword_swing() -> void:

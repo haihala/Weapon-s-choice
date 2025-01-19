@@ -9,3 +9,5 @@ script = ExtResource("1_nxc7c")
 [node name="Sword" type="Sprite2D" parent="."]
 texture_filter = 1
 texture = ExtResource("1_5tuo0")
+
+[node name="Camera2D" type="Camera2D" parent="."]

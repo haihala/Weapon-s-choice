@@ -19,6 +19,10 @@ config/icon="res://icon.svg"
 
 PlayerController="*res://player/player_controller.gd"
 
+[display]
+
+window/stretch/mode="viewport"
+
 [input]
 
 move_up={

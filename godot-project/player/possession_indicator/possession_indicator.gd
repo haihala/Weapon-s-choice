@@ -1,13 +1,23 @@
 extends Node2D
+class_name PossessionIndicator
 
-func _process(_delta: float) -> void:
+var avatar: Node2D
+
+func _ready() -> void:
 	for child in get_parent().get_children():
 		if child is Creature and child.player_controlled:
-			position = child.position
-			visible = true
-			return
+			avatar = child
+			child.following_indicator = self
 
-	# None of the creatures are player controlled
-	# Sword throw in progress
-	# Hide indicator
-	visible = false
+func _process(_delta: float) -> void:
+	if is_instance_valid(avatar):
+		position = avatar.position
+
+func move_to(target: Node2D) -> void:
+	avatar = target
+	target.following_indicator = self
+
+	if target is Creature:
+		visible = true
+	else:
+		visible = false
