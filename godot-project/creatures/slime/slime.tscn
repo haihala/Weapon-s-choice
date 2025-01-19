@@ -137,10 +137,10 @@ animations = [{
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_7grh3"]
-radius = 42.0476
+radius = 41.0488
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_7no4l"]
-radius = 55.0
+radius = 48.0
 
 [node name="Slime" type="CharacterBody2D" node_paths=PackedStringArray("idle_state", "walk_state", "host_strike_state", "sword_swing_state")]
 collision_layer = 6
@@ -190,6 +190,7 @@ sprite_frames = SubResource("SpriteFrames_cpnst")
 animation = &"lunge_back"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 4)
 shape = SubResource("CircleShape2D_7grh3")
 
 [node name="HitTimer" type="Timer" parent="."]
@@ -209,6 +210,7 @@ script = ExtResource("8_17xdd")
 damage = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DamageArea"]
+position = Vector2(0, 4)
 shape = SubResource("CircleShape2D_7no4l")
 
 [connection signal="animation_finished" from="Sprite" to="." method="idle"]
