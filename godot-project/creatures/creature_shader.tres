@@ -1,0 +1,52 @@
+[gd_resource type="VisualShader" load_steps=4 format=3 uid="uid://uba2pbrshd2e"]
+
+[sub_resource type="VisualShaderNodeInput" id="VisualShaderNodeInput_6tapy"]
+input_name = "color"
+
+[sub_resource type="VisualShaderNodeMix" id="VisualShaderNodeMix_dfovu"]
+default_input_values = [0, Vector3(0, 0, 0), 1, Vector3(1, 1, 1), 2, 0.255]
+op_type = 4
+
+[sub_resource type="VisualShaderNodeFloatParameter" id="VisualShaderNodeFloatParameter_wf2ag"]
+parameter_name = "whiteness"
+hint = 1
+default_value_enabled = true
+
+[resource]
+code = "shader_type canvas_item;
+render_mode blend_mix;
+
+uniform float whiteness : hint_range(0, 1) = 0;
+
+
+
+void fragment() {
+// Input:2
+	vec4 n_out2p0 = COLOR;
+
+
+// FloatParameter:4
+	float n_out4p0 = whiteness;
+
+
+// Mix:3
+	vec3 n_in3p1 = vec3(1.00000, 1.00000, 1.00000);
+	vec3 n_out3p0 = mix(vec3(n_out2p0.xyz), n_in3p1, n_out4p0);
+
+
+// Output:0
+	COLOR.rgb = n_out3p0;
+
+
+}
+"
+graph_offset = Vector2(-235.899, -14.1041)
+mode = 1
+flags/light_only = false
+nodes/fragment/2/node = SubResource("VisualShaderNodeInput_6tapy")
+nodes/fragment/2/position = Vector2(-340, 40)
+nodes/fragment/3/node = SubResource("VisualShaderNodeMix_dfovu")
+nodes/fragment/3/position = Vector2(20, 80)
+nodes/fragment/4/node = SubResource("VisualShaderNodeFloatParameter_wf2ag")
+nodes/fragment/4/position = Vector2(-340, 160)
+nodes/fragment/connections = PackedInt32Array(2, 0, 3, 0, 3, 0, 0, 0, 4, 0, 3, 2)

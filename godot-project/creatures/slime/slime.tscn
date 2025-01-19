@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://i8c6mhnyigcv"]
+[gd_scene load_steps=27 format=3 uid="uid://i8c6mhnyigcv"]
 
 [ext_resource type="Script" path="res://creatures/creature.gd" id="1_j7eov"]
 [ext_resource type="Script" path="res://creatures/slime/slime_ai.gd" id="2_26rvh"]
@@ -8,6 +8,61 @@
 [ext_resource type="Texture2D" uid="uid://bwkurgwh5exmn" path="res://creatures/slime/slime_sheet_back.png" id="6_xmage"]
 [ext_resource type="Texture2D" uid="uid://tni4vjdk54mb" path="res://creatures/slime/slime_sheet_front.png" id="7_vjvah"]
 [ext_resource type="Script" path="res://creatures/damage_area.gd" id="8_17xdd"]
+
+[sub_resource type="VisualShaderNodeInput" id="VisualShaderNodeInput_egfeq"]
+input_name = "color"
+
+[sub_resource type="VisualShaderNodeMix" id="VisualShaderNodeMix_c7wwh"]
+default_input_values = [0, Vector3(0, 0, 0), 1, Vector3(1, 1, 1), 2, 0.255]
+op_type = 4
+
+[sub_resource type="VisualShaderNodeFloatParameter" id="VisualShaderNodeFloatParameter_wd8ra"]
+parameter_name = "whiteness"
+hint = 1
+default_value_enabled = true
+
+[sub_resource type="VisualShader" id="VisualShader_ts4tc"]
+code = "shader_type canvas_item;
+render_mode blend_mix;
+
+uniform float whiteness : hint_range(0, 1) = 0;
+
+
+
+void fragment() {
+// Input:2
+	vec4 n_out2p0 = COLOR;
+
+
+// FloatParameter:4
+	float n_out4p0 = whiteness;
+
+
+// Mix:3
+	vec3 n_in3p1 = vec3(1.00000, 1.00000, 1.00000);
+	vec3 n_out3p0 = mix(vec3(n_out2p0.xyz), n_in3p1, n_out4p0);
+
+
+// Output:0
+	COLOR.rgb = n_out3p0;
+
+
+}
+"
+graph_offset = Vector2(-235.899, -14.1041)
+mode = 1
+flags/light_only = false
+nodes/fragment/2/node = SubResource("VisualShaderNodeInput_egfeq")
+nodes/fragment/2/position = Vector2(-340, 40)
+nodes/fragment/3/node = SubResource("VisualShaderNodeMix_c7wwh")
+nodes/fragment/3/position = Vector2(20, 80)
+nodes/fragment/4/node = SubResource("VisualShaderNodeFloatParameter_wd8ra")
+nodes/fragment/4/position = Vector2(-340, 160)
+nodes/fragment/connections = PackedInt32Array(2, 0, 3, 0, 3, 0, 0, 0, 4, 0, 3, 2)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_rwj44"]
+shader = SubResource("VisualShader_ts4tc")
+shader_parameter/whiteness = 0.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_4lsd5"]
 atlas = ExtResource("6_xmage")
@@ -185,6 +240,7 @@ blocking = true
 
 [node name="Sprite" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
+material = SubResource("ShaderMaterial_rwj44")
 scale = Vector2(3, 3)
 sprite_frames = SubResource("SpriteFrames_cpnst")
 animation = &"lunge_back"

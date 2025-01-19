@@ -48,7 +48,7 @@ func _physics_process(_delta: float) -> void:
 		# This way it slows down over the timer and is normalized 1-0
 		velocity = forced_movement * $MovementTimer.time_left / $MovementTimer.wait_time
 	active_state.on_tick()
-	update_sprite_facing()
+	update_sprite()
 	move_and_slide()
 
 func can_act() -> bool:
@@ -57,7 +57,7 @@ func can_act() -> bool:
 func get_animation(state: State = active_state) -> String:
 	return state.front_animation if facing_direction.y > 0 else state.back_animation
 
-func update_sprite_facing() -> void:
+func update_sprite() -> void:
 	$Sprite.flip_h = facing_direction.x < 0
 	var animation = get_animation()
 	if animation:
@@ -65,6 +65,9 @@ func update_sprite_facing() -> void:
 		var current_progress = $Sprite.get_frame_progress()
 		$Sprite.play(animation)
 		$Sprite.set_frame_and_progress(current_frame, current_progress)
+	
+	var whiteness = pow($HitTimer.time_left / $HitTimer.wait_time, 2.0)
+	$Sprite.material.set_shader_parameter("whiteness", whiteness)
 
 func idle() -> void:
 	if active_state != idle_state:

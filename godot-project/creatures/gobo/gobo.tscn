@@ -1,4 +1,4 @@
-[gd_scene load_steps=53 format=3 uid="uid://dmq7wioybymxo"]
+[gd_scene load_steps=55 format=3 uid="uid://dmq7wioybymxo"]
 
 [ext_resource type="Script" path="res://creatures/creature.gd" id="1_g1jkr"]
 [ext_resource type="Script" path="res://creatures/gobo/gobo_ai.gd" id="2_neb8t"]
@@ -8,10 +8,15 @@
 [ext_resource type="PackedScene" uid="uid://b3wjsfaf43v35" path="res://creatures/hitbox.tscn" id="5_ngvtc"]
 [ext_resource type="Texture2D" uid="uid://dixqn4x5d2624" path="res://creatures/gobo/gobo_sheet_back_idle.png" id="6_n8f80"]
 [ext_resource type="Texture2D" uid="uid://docvwlcynp5rj" path="res://creatures/gobo/gobo_sheet_front_idle.png" id="7_8ixx0"]
+[ext_resource type="Shader" uid="uid://uba2pbrshd2e" path="res://creatures/creature_shader.tres" id="7_s28oy"]
 [ext_resource type="Texture2D" uid="uid://cclcgohafgs5k" path="res://creatures/gobo/gobo_sheet_back_attack.png" id="8_m6n76"]
 [ext_resource type="Texture2D" uid="uid://dm5abqaja44ug" path="res://creatures/gobo/gobo_sheet_front_attack.png" id="9_0k7tb"]
 [ext_resource type="Texture2D" uid="uid://cls1rg26u8kry" path="res://creatures/gobo/gobo_sheet_back.png" id="10_gret5"]
 [ext_resource type="Texture2D" uid="uid://8gd1112pguiq" path="res://creatures/gobo/gobo_sheet_front.png" id="11_cquhf"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_b5k5d"]
+shader = ExtResource("7_s28oy")
+shader_parameter/whiteness = 0.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_33fyb"]
 atlas = ExtResource("6_n8f80")
@@ -382,6 +387,7 @@ blocking = true
 
 [node name="Sprite" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
+material = SubResource("ShaderMaterial_b5k5d")
 scale = Vector2(3, 3)
 sprite_frames = SubResource("SpriteFrames_yv3sw")
 animation = &"kick_front"
