@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://ge8vlgyrkbb0"]
+[gd_scene load_steps=6 format=3 uid="uid://ge8vlgyrkbb0"]
 
 [ext_resource type="PackedScene" uid="uid://bsqowk7lfn81c" path="res://levels/objects/obstacle.tscn" id="1_e18v3"]
 [ext_resource type="PackedScene" uid="uid://birs2ju00x7xq" path="res://levels/objects/fire.tscn" id="3_uwgwj"]
 [ext_resource type="PackedScene" uid="uid://bgcnky6v55gnt" path="res://player/possession_indicator/possession_indicator.tscn" id="4_o2a13"]
 [ext_resource type="PackedScene" uid="uid://i8c6mhnyigcv" path="res://creatures/slime/slime.tscn" id="5_ahj41"]
+[ext_resource type="PackedScene" uid="uid://dmq7wioybymxo" path="res://creatures/gobo/gobo.tscn" id="5_qn3at"]
 
 [node name="Playground" type="Node2D"]
 
@@ -31,7 +32,10 @@ position = Vector2(291, 101)
 
 [node name="Slime" parent="." instance=ExtResource("5_ahj41")]
 position = Vector2(56, -345)
-player_controlled = true
 
 [node name="Slime2" parent="." instance=ExtResource("5_ahj41")]
 position = Vector2(-71, 30)
+
+[node name="Gobo" parent="." instance=ExtResource("5_qn3at")]
+position = Vector2(93, 239)
+player_controlled = true
