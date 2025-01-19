@@ -49,7 +49,10 @@ func update_sprite_facing() -> void:
 	$Sprite.flip_h = facing_direction.x < 0
 	var animation = get_animation()
 	if animation:
-		$Sprite.animation = animation
+		var current_frame = $Sprite.get_frame()
+		var current_progress = $Sprite.get_frame_progress()
+		$Sprite.play(animation)
+		$Sprite.set_frame_and_progress(current_frame, current_progress)
 
 func idle() -> void:
 	if active_state != idle_state:
