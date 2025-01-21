@@ -93,3 +93,4 @@ sword_swing={
 2d_physics/layer_1="Physics"
 2d_physics/layer_2="Hitboxes"
 2d_physics/layer_3="Possession"
+2d_physics/layer_4="Teleporters"
