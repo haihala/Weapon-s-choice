@@ -23,6 +23,10 @@ PlayerController="*res://player/player_controller.gd"
 
 window/stretch/mode="viewport"
 
+[global_group]
+
+creature=""
+
 [input]
 
 move_up={
@@ -94,3 +98,4 @@ sword_swing={
 2d_physics/layer_2="Hitboxes"
 2d_physics/layer_3="Possession"
 2d_physics/layer_4="Teleporters"
+2d_physics/layer_5="Visibility"

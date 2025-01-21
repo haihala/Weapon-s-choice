@@ -3,8 +3,8 @@
 [ext_resource type="PackedScene" uid="uid://bsqowk7lfn81c" path="res://levels/objects/obstacle.tscn" id="1_e18v3"]
 [ext_resource type="PackedScene" uid="uid://birs2ju00x7xq" path="res://levels/objects/fire.tscn" id="3_uwgwj"]
 [ext_resource type="PackedScene" uid="uid://bgcnky6v55gnt" path="res://player/possession_indicator/possession_indicator.tscn" id="4_o2a13"]
-[ext_resource type="PackedScene" uid="uid://i8c6mhnyigcv" path="res://creatures/slime/slime.tscn" id="5_ahj41"]
-[ext_resource type="PackedScene" uid="uid://dmq7wioybymxo" path="res://creatures/gobo/gobo.tscn" id="5_qn3at"]
+[ext_resource type="PackedScene" uid="uid://i8c6mhnyigcv" path="res://creatures/creature_scenes/slime.tscn" id="5_ahj41"]
+[ext_resource type="PackedScene" uid="uid://dmq7wioybymxo" path="res://creatures/creature_scenes/gobo.tscn" id="5_qn3at"]
 
 [node name="Playground" type="Node2D"]
 

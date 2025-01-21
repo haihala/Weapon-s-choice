@@ -14,6 +14,9 @@ func bind(bind_target: Creature) -> void:
 			targets.push_back(target)
 
 func control() -> void:
+	if targets.is_empty():
+		return
+
 	var target = targets[active_target]
 	var distance = (target.position - creature.position).length()
 	if distance < 100:

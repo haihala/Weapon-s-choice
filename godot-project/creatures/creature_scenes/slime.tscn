@@ -197,12 +197,12 @@ radius = 41.0488
 [sub_resource type="CircleShape2D" id="CircleShape2D_7no4l"]
 radius = 48.0
 
-[node name="Slime" type="CharacterBody2D" node_paths=PackedStringArray("idle_state", "walk_state", "host_strike_state", "sword_swing_state")]
-collision_layer = 14
+[node name="Slime" type="CharacterBody2D" node_paths=PackedStringArray("idle_state", "walk_state", "host_strike_state", "sword_swing_state") groups=["creature"]]
+collision_layer = 30
 script = ExtResource("1_j7eov")
 ai_controller = ExtResource("2_26rvh")
 health = 1
-speed = 50
+speed = 100
 idle_state = NodePath("StateContainer/Idle")
 walk_state = NodePath("StateContainer/Move")
 host_strike_state = NodePath("StateContainer/Slide")
@@ -239,6 +239,7 @@ back_animation = "lunge_back"
 blocking = true
 
 [node name="Sprite" type="AnimatedSprite2D" parent="."]
+z_index = 10
 texture_filter = 1
 material = SubResource("ShaderMaterial_rwj44")
 scale = Vector2(3, 3)
@@ -271,4 +272,4 @@ shape = SubResource("CircleShape2D_7no4l")
 
 [connection signal="animation_finished" from="Sprite" to="." method="idle"]
 [connection signal="timeout" from="StateTimer" to="." method="idle"]
-[connection signal="body_entered" from="DamageArea" to="DamageArea" method="_on_body_entered"]
+[connection signal="body_entered" from="DamageArea" to="DamageArea" method="on_hit"]

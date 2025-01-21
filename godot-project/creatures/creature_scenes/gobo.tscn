@@ -342,8 +342,8 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_7grh3"]
 radius = 42.0119
 
-[node name="Gobo" type="CharacterBody2D" node_paths=PackedStringArray("idle_state", "walk_state", "host_strike_state", "sword_swing_state")]
-collision_layer = 14
+[node name="Gobo" type="CharacterBody2D" node_paths=PackedStringArray("idle_state", "walk_state", "host_strike_state", "sword_swing_state") groups=["creature"]]
+collision_layer = 30
 script = ExtResource("1_g1jkr")
 ai_controller = ExtResource("2_neb8t")
 speed = 500
@@ -386,6 +386,7 @@ back_animation = "sword_swing_back"
 blocking = true
 
 [node name="Sprite" type="AnimatedSprite2D" parent="."]
+z_index = 10
 texture_filter = 1
 material = SubResource("ShaderMaterial_b5k5d")
 scale = Vector2(3, 3)
