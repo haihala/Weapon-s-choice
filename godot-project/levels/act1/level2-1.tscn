@@ -1,10 +1,10 @@
 [gd_scene load_steps=7 format=4 uid="uid://bc33xkqv380bd"]
 
-[ext_resource type="TileSet" uid="uid://bsstrqp0h2v8c" path="res://levels/stone_tileset.tres" id="1_fipoi"]
-[ext_resource type="PackedScene" uid="uid://dmq7wioybymxo" path="res://creatures/creature_scenes/gobo.tscn" id="2_ad2y8"]
-[ext_resource type="PackedScene" uid="uid://bgcnky6v55gnt" path="res://player/possession_indicator/possession_indicator.tscn" id="3_uvoev"]
-[ext_resource type="PackedScene" uid="uid://i8c6mhnyigcv" path="res://creatures/creature_scenes/slime.tscn" id="4_ffuey"]
-[ext_resource type="PackedScene" uid="uid://sef01ceh8i2s" path="res://levels/objects/ladder.tscn" id="5_g66hr"]
+[ext_resource type="TileSet" uid="uid://bsstrqp0h2v8c" path="res://objects/stone_tileset.tres" id="1_fipoi"]
+[ext_resource type="PackedScene" uid="uid://dmq7wioybymxo" path="res://placeables/gobo.tscn" id="2_ad2y8"]
+[ext_resource type="PackedScene" uid="uid://i8c6mhnyigcv" path="res://placeables/slime.tscn" id="4_ffuey"]
+[ext_resource type="PackedScene" uid="uid://sef01ceh8i2s" path="res://placeables/ladder.tscn" id="5_g66hr"]
+[ext_resource type="PackedScene" uid="uid://cfctsu3tq6p8a" path="res://placeables/player_spawner.tscn" id="5_gbrx2"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_pgxnk"]
 vertices = PackedVector2Array(398, -590, 398, -306, -370, -306, -398, -590, -398, 206, -370, -142, 14, 206, 14, -142)
@@ -26,17 +26,16 @@ tile_set = ExtResource("1_fipoi")
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
 navigation_polygon = SubResource("NavigationPolygon_pgxnk")
 
-[node name="PossessionIndicator" parent="." instance=ExtResource("3_uvoev")]
-initial_creature = ExtResource("2_ad2y8")
-
 [node name="Slime" parent="." instance=ExtResource("4_ffuey")]
 position = Vector2(272, -464)
 
 [node name="Gobo" parent="." instance=ExtResource("2_ad2y8")]
 position = Vector2(-1168, 280)
 
-[node name="Ladder" parent="." node_paths=PackedStringArray("target") instance=ExtResource("5_g66hr")]
+[node name="Ladder" parent="." instance=ExtResource("5_g66hr")]
 position = Vector2(-1280, 448)
-target = NodePath("../LadderTarget")
+scene_target = "Some level"
 
-[node name="LadderTarget" type="Node2D" parent="."]
+[node name="PlayerSpawner" parent="." instance=ExtResource("5_gbrx2")]
+position = Vector2(-46, -107)
+to_spawn = ExtResource("4_ffuey")

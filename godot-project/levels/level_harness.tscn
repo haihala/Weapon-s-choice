@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://dwydmcocuqhyk"]
+
+[ext_resource type="Script" path="res://levels/level_harness.gd" id="1_1xopt"]
+[ext_resource type="PackedScene" uid="uid://bc33xkqv380bd" path="res://levels/act1/level2-1.tscn" id="2_n0ct6"]
+
+[node name="LevelHarness" type="Node2D" groups=["level_harness"]]
+script = ExtResource("1_1xopt")
+initial_level = ExtResource("2_n0ct6")
+
+[node name="Active" type="Node2D" parent="."]
