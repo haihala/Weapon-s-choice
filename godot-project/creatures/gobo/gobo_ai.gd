@@ -1,25 +1,16 @@
 extends Controller
 
-var next_update: int
+var player_position: Vector2
 
-# Gobos patrol between two targets
-var targets: Array[Node2D]
-var active_target: int
+func control() -> void:	
+	var player = find_player()
+	if can_see(player):
+		player_position = player.position
+		if (player.position - creature.position).length() < 150:
+			creature.host_strike()
+			return
 
-func bind(bind_target: Creature) -> void:
-	super.bind(bind_target)
+	if player_position:
+		creature.facing_direction = (player_position - creature.position).normalized()
+		creature.walk()
 
-	for target in creature.get_tree().get_nodes_in_group("navigation_target"):
-		if target is Node2D:
-			targets.push_back(target)
-
-func control() -> void:
-	if targets.is_empty():
-		return
-
-	var target = targets[active_target]
-	var distance = (target.position - creature.position).length()
-	if distance < 100:
-		active_target = (active_target+1)%targets.size()
-	else:
-		creature.navigate_to(target.position)
