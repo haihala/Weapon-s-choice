@@ -27,6 +27,7 @@ window/stretch/mode="viewport"
 
 creature=""
 level_harness=""
+player_spawner=""
 
 [input]
 

@@ -13,5 +13,4 @@ func register_owner(creature: Creature) -> void:
 func on_hit(body: Node2D) -> void:
 	if body is not Creature or body in blacklist:
 		return
-	print(body)
 	body.take_damage(damage, global_position)

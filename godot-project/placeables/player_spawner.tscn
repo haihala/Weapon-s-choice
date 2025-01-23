@@ -3,6 +3,6 @@
 [ext_resource type="Script" path="res://objects/player_spawner/player_spawner.gd" id="1_8kg2l"]
 [ext_resource type="PackedScene" uid="uid://bgcnky6v55gnt" path="res://player/possession_indicator/possession_indicator.tscn" id="2_g6f6f"]
 
-[node name="PlayerSpawner" type="Node2D"]
+[node name="PlayerSpawner" type="Node2D" groups=["player_spawner"]]
 script = ExtResource("1_8kg2l")
 player_indicator = ExtResource("2_g6f6f")
