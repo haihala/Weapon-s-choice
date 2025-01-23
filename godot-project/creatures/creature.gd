@@ -125,7 +125,10 @@ func take_damage(amount: int, impact_point: Vector2) -> void:
 		die()
 
 func die() -> void:
-	queue_free()
+	if player_controlled:
+		get_tree().call_group("level_harness", "reload")
+	else:
+		queue_free()
 
 func possess() -> void:
 	controller = PlayerController
