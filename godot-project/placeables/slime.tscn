@@ -1,13 +1,13 @@
-[gd_scene load_steps=27 format=3 uid="uid://i8c6mhnyigcv"]
+[gd_scene load_steps=26 format=3 uid="uid://i8c6mhnyigcv"]
 
 [ext_resource type="Script" path="res://creatures/creature.gd" id="1_j7eov"]
 [ext_resource type="Script" path="res://creatures/slime/slime_ai.gd" id="2_26rvh"]
 [ext_resource type="Script" path="res://creatures/states/State.gd" id="3_5x8pc"]
 [ext_resource type="Script" path="res://creatures/states/melee_attack_state.gd" id="4_m0cli"]
+[ext_resource type="PackedScene" uid="uid://b3wjsfaf43v35" path="res://creatures/hitbox.tscn" id="5_5q3dn"]
 [ext_resource type="PackedScene" uid="uid://dbnupk8r7roe7" path="res://player/sword_swoosh.tscn" id="5_x37oe"]
 [ext_resource type="Texture2D" uid="uid://bwkurgwh5exmn" path="res://creatures/slime/slime_sheet_back.png" id="6_xmage"]
 [ext_resource type="Texture2D" uid="uid://tni4vjdk54mb" path="res://creatures/slime/slime_sheet_front.png" id="7_vjvah"]
-[ext_resource type="Script" path="res://creatures/damage_area.gd" id="8_17xdd"]
 
 [sub_resource type="VisualShaderNodeInput" id="VisualShaderNodeInput_egfeq"]
 input_name = "color"
@@ -137,7 +137,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"lunge_back",
-"speed": 1.0
+"speed": 2.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -148,7 +148,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"lunge_front",
-"speed": 1.0
+"speed": 2.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -194,15 +194,12 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_7grh3"]
 radius = 41.0488
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_7no4l"]
-radius = 48.0
-
 [node name="Slime" type="CharacterBody2D" node_paths=PackedStringArray("idle_state", "walk_state", "host_strike_state", "sword_swing_state") groups=["creature"]]
 collision_layer = 30
 script = ExtResource("1_j7eov")
 ai_controller = ExtResource("2_26rvh")
 health = 1
-speed = 100
+speed = 150
 idle_state = NodePath("StateContainer/Idle")
 walk_state = NodePath("StateContainer/Move")
 host_strike_state = NodePath("StateContainer/Slide")
@@ -222,8 +219,11 @@ back_animation = "walk_back"
 
 [node name="Slide" type="Node" parent="StateContainer"]
 script = ExtResource("4_m0cli")
+hitbox_offset = 20.0
+hitbox_scene = ExtResource("5_5q3dn")
+hitbox_scale = 4.0
 startup_frames = 1
-lunge_distance = 400.0
+lunge_distance = 500.0
 front_animation = "lunge_front"
 back_animation = "lunge_back"
 blocking = true
@@ -244,7 +244,7 @@ texture_filter = 1
 material = SubResource("ShaderMaterial_rwj44")
 scale = Vector2(3, 3)
 sprite_frames = SubResource("SpriteFrames_cpnst")
-animation = &"lunge_back"
+animation = &"lunge_front"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 4)
@@ -260,16 +260,5 @@ one_shot = true
 [node name="MovementTimer" type="Timer" parent="."]
 one_shot = true
 
-[node name="DamageArea" type="Area2D" parent="."]
-collision_layer = 0
-collision_mask = 2
-script = ExtResource("8_17xdd")
-damage = 1
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="DamageArea"]
-position = Vector2(0, 4)
-shape = SubResource("CircleShape2D_7no4l")
-
 [connection signal="animation_finished" from="Sprite" to="." method="idle"]
 [connection signal="timeout" from="StateTimer" to="." method="idle"]
-[connection signal="body_entered" from="DamageArea" to="DamageArea" method="on_hit"]

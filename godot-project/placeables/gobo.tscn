@@ -370,6 +370,7 @@ hitbox_offset = 70.0
 hitbox_scene = ExtResource("5_ngvtc")
 hitbox_scale = 2.5
 startup_frames = 2
+active_for = 0.006
 lunge_distance = 200.0
 front_animation = "kick_front"
 back_animation = "kick_back"

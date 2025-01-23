@@ -1,12 +1,12 @@
 [gd_scene load_steps=4 format=3 uid="uid://dwydmcocuqhyk"]
 
 [ext_resource type="Script" path="res://levels/level_harness.gd" id="1_1xopt"]
-[ext_resource type="PackedScene" uid="uid://bc33xkqv380bd" path="res://levels/act1/level2-1.tscn" id="2_n0ct6"]
+[ext_resource type="PackedScene" uid="uid://dwyn3ed5jrevn" path="res://levels/act1/level2-2.tscn" id="2_57bnq"]
 [ext_resource type="PackedScene" uid="uid://i8c6mhnyigcv" path="res://placeables/slime.tscn" id="3_ijvpt"]
 
 [node name="LevelHarness" type="Node2D" groups=["level_harness"]]
 script = ExtResource("1_1xopt")
-initial_level = ExtResource("2_n0ct6")
+initial_level = ExtResource("2_57bnq")
 initial_creature = ExtResource("3_ijvpt")
 
 [node name="Active" type="Node2D" parent="."]

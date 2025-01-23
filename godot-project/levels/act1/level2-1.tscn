@@ -34,7 +34,7 @@ position = Vector2(-1168, 280)
 
 [node name="Ladder" parent="." instance=ExtResource("5_g66hr")]
 position = Vector2(-1280, 448)
-scene_target = "res://levels/act1/level2-1.tscn"
+scene_target = "res://levels/act1/level2-2.tscn"
 
 [node name="PlayerSpawner" parent="." instance=ExtResource("5_gbrx2")]
 position = Vector2(-46, -107)
